@@ -12,16 +12,16 @@ import io.ktor.server.application.*
  * A configuration for the [CachingHeaders] plugin
  */
 public class CachingHeadersConfig {
-    internal val optionsProviders = mutableListOf<(OutgoingContent) -> CachingOptions?>()
+    internal val optionsProviders = mutableListOf<(ApplicationCall, OutgoingContent) -> CachingOptions?>()
 
     init {
-        optionsProviders.add { content -> content.caching }
+        optionsProviders.add { _, content -> content.caching }
     }
 
     /**
-     * Registers a function that can provide caching options for a given [OutgoingContent]
+     * Registers a function that can provide caching options for a given [ApplicationCall] and [OutgoingContent]
      */
-    public fun options(provider: (OutgoingContent) -> CachingOptions?) {
+    public fun options(provider: (ApplicationCall, OutgoingContent) -> CachingOptions?) {
         optionsProviders.add(provider)
     }
 }
@@ -36,12 +36,12 @@ public val CachingHeaders: RouteScopedPlugin<CachingHeadersConfig> = createRoute
 ) {
     val optionsProviders = pluginConfig.optionsProviders.toList()
 
-    fun optionsFor(content: OutgoingContent): List<CachingOptions> {
-        return optionsProviders.mapNotNullTo(ArrayList(optionsProviders.size)) { it(content) }
+    fun optionsFor(call: ApplicationCall, content: OutgoingContent): List<CachingOptions> {
+        return optionsProviders.mapNotNullTo(ArrayList(optionsProviders.size)) { it(call, content) }
     }
 
     onCallRespond.afterTransform { call, message ->
-        val options = optionsFor(message)
+        val options = optionsFor(call, message)
         if (options.isEmpty()) return@afterTransform
 
         val headers = Headers.build {
