@@ -1,7 +1,9 @@
+val freemarker_version: String by extra
+
 kotlin.sourceSets {
     val jvmMain by getting {
         dependencies {
-            api("org.freemarker:freemarker:[2.3.20, 2.4)")
+            api("org.freemarker:freemarker:$freemarker_version")
         }
     }
 }

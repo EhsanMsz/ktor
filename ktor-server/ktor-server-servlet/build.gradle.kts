@@ -1,5 +1,6 @@
 description = ""
 val mockk_version: String by extra
+val servlet_version: String by extra
 
 kotlin.sourceSets {
     val jvmMain by getting {
@@ -7,7 +8,7 @@ kotlin.sourceSets {
             api(project(":ktor-server:ktor-server-host-common"))
             api(project(":ktor-http:ktor-http-cio"))
 
-            compileOnly("javax.servlet:javax.servlet-api:4.0.1")
+            compileOnly("javax.servlet:javax.servlet-api:$servlet_version")
         }
     }
 
@@ -15,7 +16,7 @@ kotlin.sourceSets {
         dependencies {
             api(project(":ktor-server:ktor-server-core", configuration = "testOutput"))
             implementation("io.mockk:mockk:$mockk_version")
-            implementation("javax.servlet:javax.servlet-api:4.0.1")
+            implementation("javax.servlet:javax.servlet-api:$servlet_version")
         }
     }
 }

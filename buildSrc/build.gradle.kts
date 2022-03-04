@@ -43,5 +43,5 @@ sourceSets.main {
 dependencies {
     println("Used kotlin version in buildSrc: " + version("kotlin"))
     implementation(kotlin("gradle-plugin", version("kotlin")))
-    implementation("com.moowork.gradle:gradle-node-plugin:1.3.1")
+    implementation("com.moowork.gradle:gradle-node-plugin:${version("gradle_node_plugin")}")
 }

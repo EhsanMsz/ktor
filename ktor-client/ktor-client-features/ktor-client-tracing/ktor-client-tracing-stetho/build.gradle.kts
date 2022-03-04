@@ -6,6 +6,7 @@ apply(from = "../../../../gradle/experimental.gradle")
 
 val android_stetho_version: String by project.extra
 val experimentalAnnotations: List<String> by project.extra
+val mockito_version: String by extra
 
 repositories {
     google()
@@ -37,7 +38,7 @@ kotlin {
                 implementation(project(":ktor-client:ktor-client-cio"))
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                implementation("org.mockito:mockito-core:3.3.3")
+                implementation("org.mockito:mockito-core:$mockito_version")
             }
         }
     }

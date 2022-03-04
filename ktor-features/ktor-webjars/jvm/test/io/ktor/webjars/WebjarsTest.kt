@@ -122,7 +122,7 @@ class WebjarsTest {
         withTestApplication {
             application.install(Webjars)
 
-            handleRequest(HttpMethod.Get, "/webjars/jquery/3.3.1/jquery.js").let { call ->
+            handleRequest(HttpMethod.Get, "/webjars/jquery/3.6.0/jquery.js").let { call ->
                 assertEquals(HttpStatusCode.OK, call.response.status())
                 assertEquals("application/javascript", call.response.headers["Content-Type"])
             }
@@ -134,7 +134,7 @@ class WebjarsTest {
         withTestApplication {
             application.install(Webjars)
             application.install(ConditionalHeaders)
-            handleRequest(HttpMethod.Get, "/webjars/jquery/3.3.1/jquery.js").let { call ->
+            handleRequest(HttpMethod.Get, "/webjars/jquery/3.6.0/jquery.js").let { call ->
                 assertEquals(HttpStatusCode.OK, call.response.status())
                 assertEquals("application/javascript", call.response.headers["Content-Type"])
                 assertNotNull(call.response.headers["Last-Modified"])

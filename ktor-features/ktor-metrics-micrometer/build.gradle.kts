@@ -1,3 +1,4 @@
+val micrometer_version: String by extra
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
     kotlinOptions {
         // micrometer uses jdk 1.8 features, so we need to use that version here
@@ -10,7 +11,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 // 1.1.3 is the latest version that works on older Android so we are unable to upgrade
-                api("io.micrometer:micrometer-core:1.7.5")
+                api("io.micrometer:micrometer-core:$micrometer_version")
                 implementation(project(":ktor-server:ktor-server-host-common"))
             }
         }

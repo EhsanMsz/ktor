@@ -138,6 +138,7 @@ apply(from = "gradle/compatibility.gradle")
 
 plugins {
     id("org.jetbrains.dokka") version "1.4.32"
+    id("com.github.ben-manes.versions") version "0.42.0"
 }
 
 allprojects {

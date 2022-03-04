@@ -4,12 +4,14 @@
 
 description = ""
 
+val json_simple_version: String by extra
+
 kotlin {
     sourceSets {
         val jvmMain by getting {
             dependencies {
                 api(project(":ktor-client:ktor-client-core"))
-                api("com.googlecode.json-simple:json-simple:1.1.1") {
+                api("com.googlecode.json-simple:json-simple:$json_simple_version") {
                     isTransitive = false
                 }
             }
